@@ -1,7 +1,6 @@
 import praw
 import sqlite3
 
-
 def scrape_reddit_politics():
 
     #reddit object
@@ -14,7 +13,9 @@ def scrape_reddit_politics():
 
     cur.execute('CREATE TABLE IF NOT EXISTS Reddit(id TEXT, author TEXT, title TEXT, content TEXT, link TEXT, score INTEGER, num_comments INTEGER)')
 
-    for submission in sub.hot(limit=50):
+    num_added = 0
+
+    for submission in sub.hot(limit=200):
         submission_id = str(submission.id)
         author = str(submission.author)
         title = str(submission.title)
@@ -29,10 +30,11 @@ def scrape_reddit_politics():
         if data == None:
             #add to the table
             cur.execute('INSERT INTO Reddit(id, author, title, content, link, score, num_comments) VALUES (?,?,?,?,?,?,?)', (submission_id, author, title, content, link, score, num_comments))
+            num_added += 1
 
 
     conn.commit()
-
+    print("Added", num_added, "post(s) to database!")
 
 
 if __name__ == '__main__':
