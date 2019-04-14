@@ -19,7 +19,7 @@ def generate_word_cloud(reddit=True):
     #all_words = []
     words_dict = {}
     #words to ignore in most common
-    ignore = ['if', 'to', 'of', 'in', 'is', 'on', 'and', 'for', 'it', 'as', 'a', 'not', "n't", "n’t", "that", "the", "or", "with", "are", "we", "’s", "'s", "his", "say", "says", "from", "do", "be", "he", "i", "out", "at", "after", "new", "about", "by", "was", "has"]
+    ignore = ["'m", '|', 'if', 'to', 'of', 'in', 'is', 'on', 'and', 'for', 'it', 'as', 'a', 'not', "n't", "n’t", "that", "the", "or", "with", "are", "we", "’s", "'s", "his", "say", "says", "from", "do", "be", "he", "i", "out", "at", "after", "new", "about", "by", "was", "has"]
 
     for tup in title_list:
         #words = tup[0].split()
@@ -29,9 +29,11 @@ def generate_word_cloud(reddit=True):
             word = word.rstrip('.')
             word = word.lower()
 
-            if not word in ignore and not token.is_punct:
+            if not word in ignore and not token.is_punct and not token.pos_ == "SYM":
                 words_dict[word] = words_dict.get(word,0) + 1
                 #all_words.append(word)
+
+    #print(sorted(words_dict.items(), key = lambda tup : tup[1]))
 
     wc = WordCloud(background_color="white",width=1000,height=1000, max_words=30,relative_scaling=0.5,normalize_plurals=False).generate_from_frequencies(words_dict)
     plt.axis("off")
