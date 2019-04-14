@@ -1,6 +1,7 @@
 #API key files
 praw.ini
-
+news_info.py
+nyt_info.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
