@@ -19,7 +19,7 @@ def generate_word_cloud(reddit=True):
     #all_words = []
     words_dict = {}
     #words to ignore in most common
-    ignore = ['to', 'of', 'in', 'is', 'on', 'and', 'for', 'it', 'as', 'a', 'not', "n't", "that", "the", "or", "with", "are", "we", "’s", "'s", "his", "say", "says", "from", "do", "be", "he", "i", "out", "at", "after", "new", "about", "by", "was", "has"]
+    ignore = ['if', 'to', 'of', 'in', 'is', 'on', 'and', 'for', 'it', 'as', 'a', 'not', "n't", "n’t", "that", "the", "or", "with", "are", "we", "’s", "'s", "his", "say", "says", "from", "do", "be", "he", "i", "out", "at", "after", "new", "about", "by", "was", "has"]
 
     for tup in title_list:
         #words = tup[0].split()
