@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import spacy
 
-def generate_word_cloud(reddit=True):
+def generate_word_cloud():
 
     #open database connection
     conn = sqlite3.connect('Final.sqlite')
@@ -43,5 +43,30 @@ def generate_word_cloud(reddit=True):
     conn.commit()
 
 
+def most_common_authors():
+    #open database connection
+    conn = sqlite3.connect('Final.sqlite')
+    cur = conn.cursor()
+
+    cur.execute('SELECT author FROM Reddit')
+    author_list = cur.fetchall()
+
+    author_dict = {}
+
+    for author in author_list:
+        screen_name = author[0]
+        author_dict[screen_name] = author_dict.get(screen_name,0) + 1
+
+    sorted_authors = sorted(author_dict.items(), key = lambda tup : tup[1], reverse=True)
+    x_axis = [item[0] for item in sorted_authors[:5]]
+    y_axis = [item[1] for item in sorted_authors[:5]]
+
+    graph = plt.bar(x=x_axis, height=y_axis)
+    plt.show()
+
+    conn.commit()
+
+
 if __name__ == '__main__':
-    generate_word_cloud()
+    #generate_word_cloud()
+    most_common_authors()
