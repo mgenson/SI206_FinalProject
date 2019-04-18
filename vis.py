@@ -78,13 +78,22 @@ class RedditStats:
             comments_dict[author] = comments_dict.get(author,0) + comments_list[i]
 
         #calculates average ratings
-        for key in ratings_dict:
+        print("Getting Averages!")
+        for author in ratings_dict:
+
+            print("Rating total:", ratings_dict[author])
+            print("Comments total:", comments_dict[author])
+
             ratings_dict[author] = (ratings_dict[author] / numPosts_dict[author])
             comments_dict[author] = (comments_dict[author] / numPosts_dict[author])
+
+            print("Rating average:", ratings_dict[author])
+            print("Comments average:", comments_dict[author])
 
         all_data = []
         for author in numPosts_dict:
             tup = (numPosts_dict[author] * 20, ratings_dict[author], comments_dict[author])
+            #print(tup)
             all_data.append(tup)
 
 
