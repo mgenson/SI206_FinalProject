@@ -78,17 +78,9 @@ class RedditStats:
             comments_dict[author] = comments_dict.get(author,0) + comments_list[i]
 
         #calculates average ratings
-        print("Getting Averages!")
         for author in ratings_dict:
-
-            print("Rating total:", ratings_dict[author])
-            print("Comments total:", comments_dict[author])
-
             ratings_dict[author] = (ratings_dict[author] / numPosts_dict[author])
             comments_dict[author] = (comments_dict[author] / numPosts_dict[author])
-
-            print("Rating average:", ratings_dict[author])
-            print("Comments average:", comments_dict[author])
 
         all_data = []
         for author in numPosts_dict:
@@ -112,6 +104,6 @@ if __name__ == '__main__':
     #define a reddit object
     reddit = RedditStats()
 
-    #reddit.generate_word_cloud()
-    #reddit.most_common_authors()
+    reddit.generate_word_cloud()
+    reddit.most_common_authors()
     reddit.authors_numPosts_ratings()
